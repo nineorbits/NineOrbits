@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,287 +21,34 @@
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
-      .orbit-spin { animation: spin 60s linear infinite; }
-      .orbit-spin-reverse { animation: spin 45s linear infinite reverse; }
-      .orbit-spin-slow { animation: spin 30s linear infinite; }
-      
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+      ::-webkit-scrollbar {
+        width: 8px;
       }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s ease-out;
+      ::-webkit-scrollbar-track {
+        background: #020617;
       }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 4px;
       }
-
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #020617; }
-      ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-      ::-webkit-scrollbar-thumb:hover { background: #334155; }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155;
+      }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.460.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
-</head>
-  <body class="selection:bg-cyan-500/30">
-    <!-- Dynamic Background -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-500/10 blur-[120px] rounded-full"></div>
-      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-500/10 blur-[120px] rounded-full"></div>
-    </div>
-
-    <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6">
-      <div class="container mx-auto px-6 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.4)]">
-            <i data-lucide="shield" class="text-white w-6 h-6"></i>
-          </div>
-          <span class="text-xl font-bold font-display tracking-tight uppercase">
-            Nine<span class="text-indigo-400">Orbits</span>
-          </span>
-        </div>
-
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-          <a href="#why" class="hover:text-indigo-400 transition-colors">Why NineOrbits</a>
-          <a href="#products" class="hover:text-indigo-400 transition-colors">Products</a>
-          <a href="#philosophy" class="hover:text-indigo-400 transition-colors">Philosophy</a>
-          <a href="#customers" class="hover:text-indigo-400 transition-colors">Customers</a>
-        </div>
-
-        <div class="hidden md:flex items-center gap-4">
-          <button class="text-sm font-medium hover:text-indigo-400 transition-colors">Login</button>
-          <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-[0_0_15px_rgba(79,70,229,0.3)]">
-            Get Security Assessment
-          </button>
-        </div>
-
-        <button id="mobile-menu-toggle" class="md:hidden text-slate-300">
-          <i data-lucide="menu"></i>
-        </button>
-      </div>
-
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-slate-900 border-b border-slate-800 p-6 flex flex-col gap-6 md:hidden">
-        <a href="#why" class="text-lg font-medium text-slate-300">Why NineOrbits</a>
-        <a href="#products" class="text-lg font-medium text-slate-300">Products</a>
-        <a href="#philosophy" class="text-lg font-medium text-slate-300">Philosophy</a>
-        <a href="#customers" class="text-lg font-medium text-slate-300">Customers</a>
-        <button class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold">
-          Get Security Assessment
-        </button>
-      </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none opacity-20 hidden lg:block">
-        <div class="absolute inset-0 border border-indigo-500/20 rounded-full orbit-spin"></div>
-        <div class="absolute inset-[100px] border border-cyan-500/10 rounded-full orbit-spin-reverse"></div>
-        <div class="absolute inset-[200px] border border-indigo-500/5 rounded-full orbit-spin-slow"></div>
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-indigo-500 rounded-full blur-[2px] shadow-[0_0_15px_#6366f1]"></div>
-      </div>
-
-      <div class="container mx-auto px-6 relative z-10 text-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wider uppercase mb-8">
-          <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-          Security-First eCommerce Infrastructure
-        </div>
-        
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold font-display leading-[1.1] mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-500">
-          Secure Every Orbit of <br class="hidden md:block" /> Your Online Commerce
-        </h1>
-        
-        <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-          Enterprise-grade infrastructure for brands that cannot afford breaches, downtime, or trust loss. We protect your revenue by securing your entire digital commerce ecosystem.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button class="w-full sm:w-auto bg-white text-slate-950 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-200 transition-all flex items-center justify-center gap-2 group">
-            Start Security Assessment
-            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-          </button>
-          <button class="w-full sm:w-auto bg-slate-800/50 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg border border-slate-700 hover:bg-slate-800 transition-all">
-            Watch Platform Overview
-          </button>
-        </div>
-
-        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-5xl mx-auto pt-16 border-t border-slate-800/50">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0">
-              <i data-lucide="shield-check" class="text-indigo-400 w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="font-semibold text-white mb-1">Commerce Native</h3>
-              <p class="text-sm text-slate-400">Built specifically for the unique vulnerabilities of Shopify, Magento, and custom stacks.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0">
-              <i data-lucide="globe" class="text-cyan-400 w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="font-semibold text-white mb-1">Global Scale</h3>
-              <p class="text-sm text-slate-400">Secure multi-region operations with high-availability infrastructure that scales.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0">
-              <i data-lucide="zap" class="text-indigo-400 w-6 h-6"></i>
-            </div>
-            <div>
-              <h3 class="font-semibold text-white mb-1">Zero Trust Checkout</h3>
-              <p class="text-sm text-slate-400">End-to-end encryption and fraud-prevention baked into every transaction orbit.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Platform Logos -->
-    <div class="py-12 border-y border-slate-800/30 bg-slate-950/50">
-      <div class="container mx-auto px-6">
-        <p class="text-center text-slate-500 text-sm font-medium uppercase tracking-widest mb-8">
-          Securing the world's leading commerce platforms
-        </p>
-        <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-          <span class="text-lg font-bold text-slate-300">Shopify Plus</span>
-          <span class="text-lg font-bold text-slate-300">Magento</span>
-          <span class="text-lg font-bold text-slate-300">BigCommerce</span>
-          <span class="text-lg font-bold text-slate-300">Salesforce</span>
-          <span class="text-lg font-bold text-slate-300">WooCommerce</span>
-          <span class="text-lg font-bold text-slate-300">Commercetools</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Why NineOrbits -->
-    <section id="why" class="py-24 relative reveal">
-      <div class="container mx-auto px-6">
-        <div class="max-w-3xl mb-16">
-          <h2 class="text-indigo-400 font-bold uppercase tracking-widest text-sm mb-4">Why NineOrbits</h2>
-          <h3 class="text-4xl md:text-5xl font-bold font-display leading-tight mb-6">
-            The trust infrastructure for <br /> the future of commerce.
-          </h3>
-          <p class="text-xl text-slate-400">
-            General cybersecurity doesn't speak 'Cart'. We provide native protection for the complex ecosystems that modern brands run on.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/50 transition-all group">
-            <div class="mb-6 p-3 rounded-xl bg-slate-800 w-fit group-hover:bg-indigo-500/10 transition-colors">
-              <i data-lucide="target" class="w-6 h-6 text-indigo-400"></i>
-            </div>
-            <h4 class="text-xl font-bold mb-4">Exclusively eCommerce</h4>
-            <p class="text-slate-400 text-sm">Specialized security for Liquid, Magento, and complex checkout leaks.</p>
-          </div>
-          <div class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/50 transition-all group">
-            <div class="mb-6 p-3 rounded-xl bg-slate-800 w-fit group-hover:bg-indigo-500/10 transition-colors">
-              <i data-lucide="lock" class="w-6 h-6 text-indigo-400"></i>
-            </div>
-            <h4 class="text-xl font-bold mb-4">Revenue-Driven</h4>
-            <p class="text-slate-400 text-sm">Security as an ROI engine. Prevent downtime and protect LTV.</p>
-          </div>
-          <div class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/50 transition-all group">
-            <div class="mb-6 p-3 rounded-xl bg-slate-800 w-fit group-hover:bg-indigo-500/10 transition-colors">
-              <i data-lucide="bar-chart-3" class="w-6 h-6 text-indigo-400"></i>
-            </div>
-            <h4 class="text-xl font-bold mb-4">Compliance Native</h4>
-            <p class="text-slate-400 text-sm">PCI-DSS and GDPR readiness woven into your architecture.</p>
-          </div>
-          <div class="p-8 rounded-3xl bg-slate-900/50 border border-slate-800 hover:border-indigo-500/50 transition-all group">
-            <div class="mb-6 p-3 rounded-xl bg-slate-800 w-fit group-hover:bg-indigo-500/10 transition-colors">
-              <i data-lucide="cpu" class="w-6 h-6 text-indigo-400"></i>
-            </div>
-            <h4 class="text-xl font-bold mb-4">Deep API Intel</h4>
-            <p class="text-slate-400 text-sm">Secure every ERP, CRM, and 3PL endpoint in your stack.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-24 relative overflow-hidden reveal">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-[3rem] p-12 md:p-20 text-center shadow-[0_20px_50px_rgba(79,70,229,0.4)]">
-          <h3 class="text-4xl md:text-6xl font-bold font-display text-white mb-8">
-            Protect your commerce <br /> before the next breach.
-          </h3>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button class="bg-white text-indigo-600 px-10 py-5 rounded-full font-bold text-lg hover:bg-indigo-50 transition-all">
-              Start Your Assessment
-            </button>
-            <button class="bg-indigo-700/50 backdrop-blur-sm border border-indigo-400/30 text-white px-10 py-5 rounded-full font-bold text-lg">
-              Contact Sales
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 pt-24 pb-12 border-t border-slate-900">
-      <div class="container mx-auto px-6 text-center">
-        <div class="flex items-center justify-center gap-2 mb-6">
-          <i data-lucide="shield" class="text-indigo-600 w-8 h-8"></i>
-          <span class="text-xl font-bold uppercase tracking-tight">Nine<span class="text-indigo-400">Orbits</span></span>
-        </div>
-        <p class="text-slate-500 text-sm mb-8 max-w-md mx-auto">
-          © 2024 NineOrbits Security Inc. All rights reserved. <br>
-          Enterprise-grade infrastructure for modern commerce.
-        </p>
-      </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-      // Initialize Lucide Icons
-      lucide.createIcons();
-
-      // Navbar Scroll Effect
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-          navbar.classList.add('glass-nav', 'py-4');
-          navbar.classList.remove('py-6');
-        } else {
-          navbar.classList.remove('glass-nav', 'py-4');
-          navbar.classList.add('py-6');
-        }
-      });
-
-      // Mobile Menu Toggle
-      const mobileToggle = document.getElementById('mobile-menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-
-      // Reveal on Scroll
-      const observerOptions = { threshold: 0.1 };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    <script type="module" src="index.tsx"></script>
+  </head>
+  <body>
+    <div id="root"></div>
   </body>
 </html>
