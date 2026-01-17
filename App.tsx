@@ -1,14 +1,14 @@
 
 import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import PlatformLogos from './components/PlatformLogos';
-import WhyNineOrbits from './components/WhyNineOrbits';
-import Products from './components/Products';
-import Philosophy from './components/Philosophy';
-import WhoWeServe from './components/WhoWeServe';
-import CTASection from './components/CTASection';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import PlatformLogos from './components/PlatformLogos.tsx';
+import WhyNineOrbits from './components/WhyNineOrbits.tsx';
+import Products from './components/Products.tsx';
+import Philosophy from './components/Philosophy.tsx';
+import WhoWeServe from './components/WhoWeServe.tsx';
+import CTASection from './components/CTASection.tsx';
+import Footer from './components/Footer.tsx';
 
 const App: React.FC = () => {
   useEffect(() => {
